@@ -62,7 +62,7 @@ build() {
     fi
     set -e  # back to failing if any command fails
     ROOT_URL=`cat ${ENV_DIR}/ROOT_URL`
-    if [[ -f ${ENV_DIR/DEBUG ]]; then
+    if [[ -f ${ENV_DIR}/DEBUG ]]; then
       DEBUG_ARG=--debug
     fi
     
