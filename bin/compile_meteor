@@ -62,7 +62,11 @@ build() {
     fi
     set -e  # back to failing if any command fails
     ROOT_URL=`cat ${ENV_DIR}/ROOT_URL`
-    meteor build ../build --directory --server ${ROOT_URL} 2>&1 | indent
+    if [[ -f ${ENV_DIR/DEBUG ]]; then
+      DEBUG_ARG=--debug
+    fi
+    
+    meteor build ../build --directory --server ${ROOT_URL} ${DEBUG_ARG} 2>&1 | indent
     head "Installing App's NPM Dependencies"
     (cd ../build/bundle/programs/server && npm install 2>&1 | indent)
     cd $BUILD_DIR && rm -rf $APP_SOURCE
