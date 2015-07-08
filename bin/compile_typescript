@@ -23,7 +23,7 @@ build() {
   (
     npm install -g typescript@${TYPESCRIPT_VERSION}
     head "Installing typescript..."
-    cd $APP_SOURCE/tools
+    cd $APP_SOURCE
     sh list-ts-files.sh
     SOURCE_MAP_FLAG=""
     if [[ -f "${ENV_DIR}/DEBUG" ]]; then
