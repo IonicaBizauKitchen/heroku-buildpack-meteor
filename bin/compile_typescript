@@ -27,12 +27,13 @@ build() {
     npm install -g typescript@${TYPESCRIPT_VERSION}
     head "Installing typescript..."
     cd $APP_SOURCE
+    /bin/bash list-ts-files.sh
     SOURCE_MAP_FLAG=""
     if [[ -f "${ENV_DIR}/DEBUG" ]]; then
       SOURCE_MAP_FLAG="--inlineSourceMap --inlineSources";
     fi
     head "Compiling typescript files..."
-    tsc -p . ${SOURCE_MAP_FLAG}
+    tsc @ts-files.txt ${SOURCE_MAP_FLAG}
   )
 }
 
