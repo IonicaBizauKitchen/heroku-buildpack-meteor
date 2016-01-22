@@ -11,8 +11,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 APP_SOURCE=$BUILD_DIR/app_src
-#METEOR_HOME=$BUILD_DIR/.meteor_tool
-METEOR_HOME=$BUILD_DIR/.meteor
+METEOR_HOME=$BUILD_DIR/.meteor_tool
 PATH=$METEOR_HOME:$BUILD_DIR/.heroku/node/bin:$PATH
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
@@ -41,7 +40,7 @@ fetch_meteor() {
 
   head "Unpacking Meteor $METEOR_VERSION"
   tar -xzf "$PACKAGE" -C "$BUILD_DIR"
-  #mv "$BUILD_DIR/.meteor" "$METEOR_HOME"
+  mv "$BUILD_DIR/.meteor" "$METEOR_HOME"
   # bomb out if it didn't work, eg no net
   [ ! -x "${METEOR_HOME}/meteor" ] && error "Install failed: No meteor bin found."
   info "Meteor $METEOR_VERSION is installed"
