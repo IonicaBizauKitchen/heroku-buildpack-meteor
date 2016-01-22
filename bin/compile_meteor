@@ -55,11 +55,13 @@ build() {
     set -x
     grep -Fxq ios .meteor/platforms
     if [ $? -eq 0 ]; then
-      meteor remove-platform ios 2>&1 | indent
+      sed -i -e "/^ios$/d" .meteor/platforms
+      # meteor remove-platform ios 2>&1 | indent
     fi
     grep -Fxq android .meteor/platforms
     if [ $? -eq 0 ]; then
-      meteor remove-platform android 2>&1 | indent
+      sed -i -e "/^android$/d" .meteor/platforms
+      #meteor remove-platform android 2>&1 | indent
     fi
     set -e  # back to failing if any command fails
     ROOT_URL=`cat ${ENV_DIR}/ROOT_URL`
