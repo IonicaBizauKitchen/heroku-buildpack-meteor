@@ -41,7 +41,6 @@ fetch_meteor() {
   head "Unpacking Meteor $METEOR_VERSION"
   tar -xzf "$PACKAGE" -C "$BUILD_DIR"
   mv "$BUILD_DIR/.meteor" "$METEOR_HOME"
-  ln -s "${METEOR_HOME}" "${BUILD_DIR}/.meteor"
   # bomb out if it didn't work, eg no net
   [ ! -x "${METEOR_HOME}/meteor" ] && error "Install failed: No meteor bin found."
   info "Meteor $METEOR_VERSION is installed"
@@ -69,6 +68,8 @@ build() {
     if [[ -f ${ENV_DIR}/DEBUG ]]; then
       DEBUG_ARG=--debug
     fi
+    
+    ln -s "${METEOR_HOME}" "${BUILD_DIR}/.meteor"
     
     METEOR_LOG=debug meteor build ../build --directory --server ${ROOT_URL} ${DEBUG_ARG} 2>&1 | indent
     head "Installing App's NPM Dependencies"
