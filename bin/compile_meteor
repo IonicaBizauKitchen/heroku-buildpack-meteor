@@ -69,7 +69,7 @@ build() {
       DEBUG_ARG=--debug
     fi
     
-    meteor build ../build --directory --server ${ROOT_URL} ${DEBUG_ARG} 2>&1 | indent
+    METEOR_LOG=debug meteor build ../build --directory --server ${ROOT_URL} ${DEBUG_ARG} 2>&1 | indent
     head "Installing App's NPM Dependencies"
     (cd ../build/bundle/programs/server && npm install 2>&1 | indent)
     cd $BUILD_DIR # && rm -rf $APP_SOURCE
