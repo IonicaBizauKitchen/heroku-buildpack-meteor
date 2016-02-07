@@ -15,6 +15,7 @@ source $bp_dir/bin/common.sh
   shopt -s dotglob nullglob
   mv * ../app_src
   mv ../app_src ./app_src
+  cp ./app_src/Procfile ./Procfile || true
 )
 
 
