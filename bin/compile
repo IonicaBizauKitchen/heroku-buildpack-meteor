@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # USAGE: bin/compile <build-dir> <cache-dir> <env-dir>
 
+ENV_DIR=$3
+
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
 # Load some convenience functions like status(), echo(), and indent()
@@ -15,7 +17,14 @@ source $bp_dir/bin/common.sh
   shopt -s dotglob nullglob
   mv * ../app_src
   mv ../app_src ./app_src
-  cp ./app_src/Procfile ./Procfile || true
+
+  # Allow for custom Procfile.
+  PROCFILE_PATH="Procfile"
+  if [[ -f "${ENV_DIR}/PROCFILE_PATH" ]]; then
+    PROCFILE_PATH=`cat "${ENV_DIR}/PROCFILE_PATH"`
+  fi
+  # Copy Procfile to root.
+  cp "./app_src/${PROCFILE_PATH}" ./Procfile || true
 )
 
 
