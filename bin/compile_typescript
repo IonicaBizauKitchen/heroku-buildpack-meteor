@@ -14,7 +14,7 @@ APP_SOURCE=$BUILD_DIR/app_src
 METEOR_HOME=$BUILD_DIR/.meteor_tool
 PATH=$METEOR_HOME:$BUILD_DIR/.heroku/node/bin:$PATH
 bp_dir=$(cd $(dirname $0); cd ..; pwd)
-TYPESCRIPT_VERSION=1.6
+TYPESCRIPT_VERSION=1.8
 
 # Load some convenience functions like status(), echo(), and indent()
 source $bp_dir/bin/common.sh
