@@ -37,6 +37,10 @@ export_env_dir $env_dir
 node_engine="0.10.40"
 node_previous=$(file_contents "$cache_dir/node/node-version")
 
+if [[ -f "${ENV_DIR}/NODE_VERSION" ]]; then
+  node_engine=`cat "${ENV_DIR}/NODE_VERSION"`;
+fi
+
 # What's the requested semver range for npm?
 npm_engine=$(package_json ".engines.npm")
 npm_previous=$(file_contents "$cache_dir/node/npm-version")
