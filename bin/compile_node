@@ -207,6 +207,10 @@ if test -d $build_dir/node_modules; then
   cp -r $build_dir/node_modules $cache_dir/node
 fi
 
+# Tomas: Link node_modules inside so that we can find them
+# TODO: Clean up this mess...we shouldn't move stuff around like this!
+cp -r $build_dir/node_modules $build_dir/app_src/node_modules || true
+
 # Show the final dependency tree
 info "Build successful!"
 (npm ls --depth=0 || true) 2>/dev/null | indent
