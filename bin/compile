@@ -25,6 +25,9 @@ source $bp_dir/bin/common.sh
   fi
   # Copy Procfile to root.
   cp "./app_src/${PROCFILE_PATH}" ./Procfile || true
+
+  cp "./app_src/npm-shrinkwrap.json" ./ || true
+  cp "./app_src/package.json" ./ || true
 )
 
 
