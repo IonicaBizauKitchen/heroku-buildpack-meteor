@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# USAGE: bin/compile_typescript <build-dir> <cache-dir> <env-dir>
+
+####### Configure environment
+
+set -e  # fail fast
+
+###### NEEDED VARIABLES/DIRECTORIES
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+APP_SOURCE=$BUILD_DIR/app_src
+METEOR_HOME=$BUILD_DIR/.meteor_tool
+PATH=$METEOR_HOME:$BUILD_DIR/.heroku/node/bin:$PATH
+bp_dir=$(cd $(dirname $0); cd ..; pwd)
+#TYPESCRIPT_VERSION=1.8
+
+# Load some convenience functions like status(), echo(), and indent()
+source $bp_dir/bin/common.sh
+
+build() {
+  (
+    #if [[ -f "${ENV_DIR}/TYPESCRIPT_VERSION" ]]; then
+    #  TYPESCRIPT_VERSION=`cat "${ENV_DIR}/TYPESCRIPT_VERSION"`;
+    #fi
+    #npm install -g typescript@${TYPESCRIPT_VERSION}
+    #head "Installing typescript..."
+    cd $APP_SOURCE
+    SOURCE_MAP_FLAG=""
+    if [[ -f "${ENV_DIR}/DEBUG" ]]; then
+      SOURCE_MAP_FLAG="--inlineSourceMap --inlineSources";
+    fi
+    head "Compiling typescript files..."
+    ./node_modules/.bin/tsc -p . ${SOURCE_MAP_FLAG}
+  )
+}
+
+build
