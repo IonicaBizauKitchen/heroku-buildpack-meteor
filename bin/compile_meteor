@@ -50,6 +50,8 @@ fetch_meteor() {
 build() {
   (
     head "Building Meteor App Bundle"
+    head "--------------------------"
+    echo ">>> MongoURL: $MONGO_URL"
     cd $APP_SOURCE
     # can't build with these platforms enabled, it looks like
     set +e  # these next few are allowed to exit nonzero
@@ -69,7 +71,7 @@ build() {
     if [[ -f ${ENV_DIR}/DEBUG ]]; then
       DEBUG_ARG=--debug
     fi
-    
+
     METEOR_LOG=debug meteor build ../build --directory --server ${ROOT_URL} ${DEBUG_ARG} 2>&1 | indent
     head "Installing App's NPM Dependencies"
     (cd ../build/bundle/programs/server && npm install 2>&1 | indent)
