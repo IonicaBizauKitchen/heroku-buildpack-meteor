@@ -6,5 +6,5 @@ BUILD_DIR=$1
 cat <<-YAML
 ---
 default_process_types:
-  web: echo "MongoURL: $MONGO_URL"; node build/bundle/main.js
+  web: 'echo "MongoURL: $MONGO_URL"; node build/bundle/main.js'
 YAML
